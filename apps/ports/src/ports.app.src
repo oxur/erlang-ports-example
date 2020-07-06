@@ -1,0 +1,14 @@
+{application, ports,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, [ports]},
+  {mod, {ports_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, [go_echo_server, util]},
+  {licenses, ["BSD 2-clause"]},
+  {links, []}
+ ]}.
