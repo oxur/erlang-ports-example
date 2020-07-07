@@ -33,7 +33,7 @@ init([]) ->
     {ok,
      {#{strategy => one_for_one, intensity => 3,
 	period => 60},
-      [child(go_echo_server)]}}.
+      [child(go_echo_server), child(lisp_echo_server)]}}.
 
 pid() -> erlang:whereis(?MODULE).
 

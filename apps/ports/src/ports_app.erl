@@ -10,7 +10,8 @@
 %% Application callbacks
 -export([start/2, stop/1]).
 
--export([info/0, ports/0, servers/0, supervisor/0]).
+-export([children/0, info/0, ports/0, servers/0,
+	 supervisor/0]).
 
 -define(SUPERVISOR, ports_sup).
 
@@ -27,6 +28,8 @@ start(_StartType, _StartArgs) ->
 stop(_State) -> ports_sup:stop(), ok.
 
 supervisor() -> erlang:whereis(?SUPERVISOR).
+
+children() -> supervisor:which_children(?SUPERVISOR).
 
 servers() -> {go_echo, go_echo_server:pid()}.
 

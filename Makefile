@@ -2,9 +2,6 @@ PROJ = ports
 REL_DIR = ./_build/default/rel/$(PROJ)
 PROJ_BIN = $(REL_DIR)/bin/$(PROJ)
 PRIV = ./apps/$(PROJ)/priv
-GO_BASE = $(PRIV)/go/src/github.com/geomyidia
-GO_PROJ = $(GO_BASE)/erlang-port-examples
-SUB_PROJS = $(GO_PROJ)
 PWD = $(shell pwd)
 
 #############################################################################
@@ -13,11 +10,11 @@ PWD = $(shell pwd)
 
 default: build
 
-build: build-go release
+build: build-cl build-go release
 
-clean-all: clean clean-go
+clean-all: clean clean-cl clean-go
 
-.PHONY: default run release shutdown run-fresh
+.PHONY: default run release shutdown run-fresh build build-cl build-go clean-cl clean-go
 
 #############################################################################
 ###   Erlang Targets   ######################################################
@@ -49,6 +46,9 @@ clean:
 ###   Go Targets   ##########################################################
 #############################################################################
 
+GO_BASE = $(PRIV)/go/src/github.com/geomyidia
+GO_PROJ = $(GO_BASE)/erlang-port-examples
+
 $(GO_PROJ):
 	@echo ">> Setting up Go examples ..."
 	-@mkdir $(GO_BASE) && \
@@ -60,3 +60,20 @@ build-go: | $(GO_PROJ)
 
 clean-go:
 	@cd $(GO_PROJ) && $(MAKE) clean
+
+#############################################################################
+###   Common Lisp Targets   #################################################
+#############################################################################
+
+CL_PROJ = $(PRIV)/cl-port-examples
+
+$(CL_PROJ):
+	@echo ">> Setting up Common Lisp examples ..."
+	@git clone https://github.com/cl-axon/erlang-port-examples.git $(CL_PROJ)
+
+build-lisp: | $(CL_PROJ)
+	@echo ">> Building Common Lisp examples ..."
+	@cd $(CL_PROJ) && $(MAKE)
+
+clean-lisp:
+	@cd $(CL_PROJ) && $(MAKE) clean

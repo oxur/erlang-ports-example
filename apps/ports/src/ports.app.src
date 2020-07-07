@@ -8,7 +8,7 @@
     stdlib
    ]},
   {env,[]},
-  {modules, [go_echo_server, util]},
+  {modules, [go_echo_server, lisp_echo_server, util]},
   {licenses, ["BSD 2-clause"]},
   {links, []}
  ]}.
