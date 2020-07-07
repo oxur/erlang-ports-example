@@ -7,9 +7,21 @@ GO_PROJ = $(GO_BASE)/erlang-port-examples
 SUB_PROJS = $(GO_PROJ)
 PWD = $(shell pwd)
 
+#############################################################################
+###   General Targets   #####################################################
+#############################################################################
+
 default: build
 
 build: build-go release
+
+clean-all: clean clean-go
+
+.PHONY: default run release shutdown run-fresh
+
+#############################################################################
+###   Erlang Targets   ######################################################
+#############################################################################
 
 $(PROJ_BIN):
 	@echo '>> Building release ...'
@@ -17,18 +29,12 @@ $(PROJ_BIN):
 
 release: | $(PROJ_BIN)
 
-$(GO_PROJ):
-	@echo ">> Setting up Go examples ..."
-	@mkdir -p $(GO_BASE)
-	@git clone https://github.com/geomyidia/erlang-port-examples.git $(GO_PROJ)
-
-build-go: | $(GO_PROJ)
-	@cd $(GO_PROJ) && $(MAKE)
-
 run: release
 	@echo '>> Running application from distribution console ...'
 	@echo $(PROJ_BIN)
 	@GO111MODULE=on GOPATH=$(PWD)/apps/ports/priv/go $(PROJ_BIN) console
+
+run-fresh: clean-all build run
 
 shutdown:
 	@echo '>> Shutting down OTP application ...'
@@ -39,7 +45,18 @@ clean:
 	@rebar3 clean
 	@rm -rf $(REL_DIR)
 
-clean-all: clean
-	@cd $(GO_PROJ) && $(MAKE) clean
+#############################################################################
+###   Go Targets   ##########################################################
+#############################################################################
 
-.PHONY: default run release $(SUB_PROJS)
+$(GO_PROJ):
+	@echo ">> Setting up Go examples ..."
+	-@mkdir $(GO_BASE) && \
+	  git clone https://github.com/geomyidia/erlang-port-examples.git $(GO_PROJ)
+
+build-go: | $(GO_PROJ)
+	@echo ">> Building Go examples ..."
+	@cd $(GO_PROJ) && $(MAKE)
+
+clean-go:
+	@cd $(GO_PROJ) && $(MAKE) clean
