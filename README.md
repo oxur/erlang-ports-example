@@ -83,6 +83,33 @@ lfe> (ports-app:children)
 #(result "echo")
 ```
 
+## Crashing the Language Servers
+
+You can induce a crash in the Go and Common Lisp echo servers. To easily see that a new port gets started up, let's take a look at the server PIDs and port IDs:
+
+```lisp
+(ports@spacemac)lfe> (ports-app:servers)
+(#(go-echo #Pid<0.356.0>) #(lisp-echo #Pid<0.357.0>))
+(ports@spacemac)lfe> (ports-app:ports)
+(#(go-echo #Port<0.7>) #(lisp-echo #Port<0.8>))
+```
+
+Now let's crash things:
+
+```lisp
+(ports@spacemac)lfe> (go-echo-server:send #(command crash_it))
+(ports@spacemac)lfe> (lisp-echo-server:send #(command crash_it))
+```
+
+Let's confirm that there are now new servers and ports created:
+
+```lisp
+(ports@spacemac)lfe> (ports-app:servers) 
+(#(go-echo #Pid<0.382.0>) #(lisp-echo #Pid<0.385.0>))
+(ports@spacemac)lfe> (ports-app:ports)  
+(#(go-echo #Port<0.10>) #(lisp-echo #Port<0.11>))
+```
+
 <!-- Named page links below: /-->
 
 [logo]: priv/images/project-logo.png
