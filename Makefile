@@ -1,7 +1,7 @@
 PROJ = ports
 REL_DIR = ./_build/default/rel/$(PROJ)
 PROJ_BIN = $(REL_DIR)/bin/$(PROJ)
-PRIV = ./apps/$(PROJ)/priv
+PRIV = apps/$(PROJ)/priv
 PWD = $(shell pwd)
 
 #############################################################################
@@ -10,15 +10,31 @@ PWD = $(shell pwd)
 
 default: build
 
-build: build-cl build-go release
+build: $(PRIV) build-cl build-go release
 
 clean-all: clean clean-cl clean-go
 
 .PHONY: default run release shutdown run-fresh build build-cl build-go clean-cl clean-go
 
+help:
+	@echo
+	@echo "To add a new language to this repo, look at the Makefile targets"
+	@echo "for the other languages already present. Create targets like"
+	@echo "those (along with a unique VAR for the languages's repo and"
+	@echo "directory)."
+	@echo
+	@echo "Once you've added your targets, run your 'init' target via"
+	@echo "make. Future updates to your language repo can be pulled in here"
+	@echo "with your added 'update' target (or you can update all repos with"
+	@echo "the general-purpose update target)."
+	@echo
+
 #############################################################################
 ###   Erlang Targets   ######################################################
 #############################################################################
+
+$(PRIV):
+	@mkdir -p $(PRIV)
 
 $(PROJ_BIN):
 	@echo '>> Building release ...'
@@ -46,34 +62,78 @@ clean:
 ###   Go Targets   ##########################################################
 #############################################################################
 
+GO_REPO = https://github.com/geomyidia/erlang-port-examples.git
 GO_BASE = $(PRIV)/go/src/github.com/geomyidia
-GO_PROJ = $(GO_BASE)/erlang-port-examples
+GO_PROJ = erlang-port-examples
+GO_DIR = $(GO_BASE)/$(GO_PROJ)
 
-$(GO_PROJ):
+$(GO_BASE):
+	@mkdir -p $(GO_BASE)
+
+init-go: $(GO_BASE)
 	@echo ">> Setting up Go examples ..."
-	-@mkdir $(GO_BASE) && \
-	  git clone https://github.com/geomyidia/erlang-port-examples.git $(GO_PROJ)
+	@git subtree add \
+	   --prefix $(GO_DIR) \
+	   $(GO_REPO) \
+	   master \
+	   --squash
 
-build-go: | $(GO_PROJ)
+update-go:
+	@echo ">> Updating Go examples ..."
+	@git subtree pull \
+	   --m "Updated latest from $(PRIV)/go." \
+	   --prefix $(GO_DIR) \
+	   $(GO_REPO) \
+	   master \
+	   --squash
+
+build-go: | $(GO_DIR)
 	@echo ">> Building Go examples ..."
-	@cd $(GO_PROJ) && $(MAKE)
+	@cd $(GO_DIR) && $(MAKE)
 
 clean-go:
-	@cd $(GO_PROJ) && $(MAKE) clean
+	@cd $(GO_DIR) && $(MAKE) clean
 
 #############################################################################
 ###   Common Lisp Targets   #################################################
 #############################################################################
 
-CL_PROJ = $(PRIV)/cl-port-examples
+CL_REPO = https://github.com/cl-axon/erlang-port-examples.git
+CL_PROJ = erlang-port-examples
+CL_DIR = $(PRIV)/cl-port-examples
 
-$(CL_PROJ):
+init-lisp:
 	@echo ">> Setting up Common Lisp examples ..."
-	@git clone https://github.com/cl-axon/erlang-port-examples.git $(CL_PROJ)
+	@git subtree add \
+	   --prefix $(CL_PROJ) \
+	   $(CL_REPO) \
+	   master \
+	   --squash
 
-build-lisp: | $(CL_PROJ)
+update-lisp:
+	@echo ">> Updating Common Lisp examples ..."
+	@git subtree pull \
+	   --m "Updated latest from Lisp $(CL_DIR)." \
+	   --prefix $(CL_PROJ) \
+	   $(CL_REPO) \
+	   master \
+	   --squash
+
+build-cl: | $(CL_DIR)
 	@echo ">> Building Common Lisp examples ..."
-	@cd $(CL_PROJ) && $(MAKE)
+	@cd $(CL_DIR) && $(MAKE)
 
-clean-lisp:
-	@cd $(CL_PROJ) && $(MAKE) clean
+clean-cl:
+	@cd $(CL_DIR) && $(MAKE) clean
+
+#############################################################################
+###   All Languages   #######################################################
+#############################################################################
+
+init: \
+	init-go \
+	init-lisp
+
+update: \
+	update-go \
+	update-lisp

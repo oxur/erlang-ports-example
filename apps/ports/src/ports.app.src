@@ -2,13 +2,13 @@
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, [ports]},
-  {mod, {ports_app, []}},
+  {mod, {'ports-app', []}},
   {applications,
    [kernel,
     stdlib
    ]},
   {env,[]},
-  {modules, [go_echo_server, lisp_echo_server, util]},
+  {modules, ['go-echo-server', 'lisp-echo-server', util]},
   {licenses, ["BSD 2-clause"]},
   {links, []}
  ]}.
