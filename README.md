@@ -9,6 +9,9 @@
 
 *Example Rust applications that communicate with Erlang/OTP applications via Erlang Ports*
 
+## Usage
+
+This Rust application is intended to be used as part of the [LFE/OTP Port Examples](https://github.com/lfex/port-examples) project (which includes other language integratioins such as Common Lisp and Go).
 
 ## License
 
