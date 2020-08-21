@@ -40,10 +40,7 @@ $ make quicklisp-link
 $ make
 ```
 
-This will clone the Go and Common Lisp repos that are used in the examples.
-Now you need to tell Quicklisp about the cloned Common Lisp libs:
-
-
+This will build the Go and Common Lisp servers that are used in the examples, compile the LFE, and create an OTP release.
 
 Now the app is ready to run:
 
