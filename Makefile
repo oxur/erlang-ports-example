@@ -105,7 +105,7 @@ CL_DIR = $(PRIV)/cl-port-examples
 init-lisp:
 	@echo ">> Setting up Common Lisp examples ..."
 	@git subtree add \
-	   --prefix $(CL_PROJ) \
+	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
 	   master \
 	   --squash
@@ -114,7 +114,7 @@ update-lisp:
 	@echo ">> Updating Common Lisp examples ..."
 	@git subtree pull \
 	   --m "Updated latest from Lisp $(CL_DIR)." \
-	   --prefix $(CL_PROJ) \
+	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
 	   master \
 	   --squash
