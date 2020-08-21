@@ -1,4 +1,4 @@
-(defmodule ports-sup
+(defmodule ports.supervisor
   (behaviour supervisor)
   (export
    (start_link 0)
@@ -17,8 +17,8 @@
   (supervisor:start_link `#(local ,(SERVER)) (MODULE) '()))
 
 (defun stop ()
-  (go-echo-server:stop)
-  (lisp-echo=server:stop)
+  (ports.go.server:stop)
+  (ports.lisp.server:stop)
   (exit (pid) 'shutdown))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,8 +29,8 @@
   `#(ok #(#m(strategy one_for_one
              intensity 3
 	           period 60)
-          (,(child 'go-echo-server)
-           ,(child 'lisp-echo-server)))))
+          (,(child 'ports.go.server)
+           ,(child 'ports.lisp.server)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

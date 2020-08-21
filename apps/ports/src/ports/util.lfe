@@ -1,4 +1,4 @@
-(defmodule util
+(defmodule ports.util
   (export
    (create-port 2)
    (priv-dir 0)

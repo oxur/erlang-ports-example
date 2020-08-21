@@ -1,4 +1,4 @@
-(defmodule ports-app
+(defmodule ports.app
   (behaviour application)
   (export
    (start 2)
@@ -10,7 +10,7 @@
    (servers 0)
    (supervisor 0)))
 
-(defun SUPERVISOR () 'ports-sup)
+(defun SUPERVISOR () 'ports.supervisor)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   OTP Application   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -19,10 +19,10 @@
 (defun start (_start-type _start-args)
   (logger:set_application_level 'ports 'all)
   (logger:info "Starting application" '())
-  (ports-sup:start_link))
+  (ports.supervisor:start_link))
 
 (defun stop (_state)
-  (ports-sup:stop)
+  (ports.supervisor:stop)
   'ok)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36,17 +36,17 @@
   (supervisor:which_children (SUPERVISOR)))
 
 (defun servers ()
-  `(#(go-echo ,(go-echo-server:pid))
-    #(lisp-echo ,(lisp-echo-server:pid))))
+  `(#(go ,(ports.go.server:pid))
+    #(lisp ,(ports.lisp.server:pid))))
 
 (defun ports ()
-  `(#(go-echo ,(go-echo-server:port))
-    #(lisp-echo ,(lisp-echo-server:port))))
+  `(#(go ,(ports.go.server:port))
+    #(lisp ,(ports.lisp.server:port))))
 
 (defun info ()
   `(#(app ,(erlang:process_info (self)))
     #(supervisor ,(erlang:process_info (supervisor)))
-    #(go-echo (#(server ,(erlang:process_info (go-echo-server:pid)))
-               #(port ,(erlang:port_info (go-echo-server:port)))))
-    #(lisp-echo (#(server ,(erlang:process_info (lisp-echo-server:pid)))
-                 #(port ,(erlang:port_info (lisp-echo-server:port)))))))
+    #(go (#(server ,(erlang:process_info (ports.go.server:pid)))
+          #(port ,(erlang:port_info (ports.go.server:port)))))
+    #(lisp (#(server ,(erlang:process_info (ports.lisp.server:pid)))
+            #(port ,(erlang:port_info (ports.lisp.server:port)))))))

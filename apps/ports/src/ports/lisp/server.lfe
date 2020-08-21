@@ -1,4 +1,4 @@
-(defmodule lisp-echo-server
+(defmodule ports.lisp.server
   (behaviour gen_server)
   (export
    (start_link 0)
@@ -50,7 +50,7 @@
    (let ((msg-bin (erlang:term_to_binary msg)))
      (logger:debug "Sending data: ~p" `(,msg-bin))
      (! port `#(,(self) #(command (,msg-bin ,(DELIMITER)))))
-     (let ((data (util:receive-line port (LISP-TIMEOUT))))
+     (let ((data (ports.util:receive-line port (LISP-TIMEOUT))))
        (logger:debug "Got data: ~p" `(,data))
        (case data
          (#b()
@@ -109,9 +109,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun create-port ()
-  (util:create-port
+  (ports.util:create-port
     (LISP-COMMAND)
-    (++ "--script " (filename:join (util:priv-dir) (LISP-SERVER)))))
+    (++ "--script " (filename:join (ports.util:priv-dir) (LISP-SERVER)))))
 
 (defun stop-port (port)
     (! port `#(,(self) 'close)))

@@ -1,4 +1,4 @@
-(defmodule go-echo-server
+(defmodule ports.go.server
   (behaviour gen_server)
   (export
    (start_link 0)
@@ -49,7 +49,7 @@
    (let ((msg-bin (erlang:term_to_binary msg)))
      (logger:debug "Sending data: ~p" `(,msg-bin))
      (! port `#(,(self) #(command (,msg-bin ,(DELIMITER)))))
-     (let ((data (util:receive-line port (GO-TIMEOUT))))
+     (let ((data (ports.util:receive-line port (GO-TIMEOUT))))
        (logger:debug "Got data: ~p" `(,data))
        (case data
          (#b()
@@ -111,7 +111,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun create-port ()
-  (util:create-port (filename:join (util:priv-dir) (GO-BIN)) '()))
+  (ports.util:create-port 
+    (filename:join (ports.util:priv-dir) (GO-BIN)) '()))
 
 (defun stop-port (port)
   (! port `#(,(self) 'close)))
