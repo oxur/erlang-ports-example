@@ -72,7 +72,7 @@ $(GO_BASE):
 
 init-go: $(GO_BASE)
 	@echo ">> Setting up Go examples ..."
-	@git subtree add \
+	-@git subtree add \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
 	   master \
@@ -104,7 +104,7 @@ CL_DIR = $(PRIV)/cl-port-examples
 
 init-lisp:
 	@echo ">> Setting up Common Lisp examples ..."
-	@git subtree add \
+	-@git subtree add \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
 	   master \
