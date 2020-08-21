@@ -37,7 +37,7 @@
 
 (defun init (_args)
   (erlang:process_flag 'trap_exit 'true)
-  `#(ok ,(erlang:create_port)))
+  `#(ok ,(create-port)))
 
 (defun handle_call
   (('stop _from port)
@@ -112,4 +112,3 @@
 
 (defun stop-port (port)
   (! port `#(,(self) 'close)))
-

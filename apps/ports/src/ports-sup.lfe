@@ -13,7 +13,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun start_link ()
-  (logger:set_application_level 'ports 'all)
   (logger:info "Starting supervisor ...")
   (supervisor:start_link `#(local ,(SERVER)) (MODULE) '()))
 
@@ -29,9 +28,9 @@
 (defun init (_args)
   `#(ok #(#m(strategy one_for_one
              intensity 3
-	     period 60)
+	           period 60)
           (,(child 'go-echo-server)
-            (child 'lisp-echo-server)))))
+           ,(child 'lisp-echo-server)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,10 +44,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun child (mod)
-  `#m(id mod
-      start `#(,mod start_link '())
+  `#m(id ,mod
+      start #(,mod start_link ())
       restart permanent
       shutdown 2000
-      type worke,
+      type worker
       modules (,mod)))
-

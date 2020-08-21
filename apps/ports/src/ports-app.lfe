@@ -17,7 +17,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun start (_start-type _start-args)
-  (logger:application 'ports-app)
+  (logger:set_application_level 'ports 'all)
   (logger:info "Starting application" '())
   (ports-sup:start_link))
 
@@ -28,7 +28,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 (defun supervisor ()
   (erlang:whereis (SUPERVISOR)))
@@ -42,13 +41,12 @@
 
 (defun ports ()
   `(#(go-echo ,(go-echo-server:port))
-    #(lisp-echo ,(listp-echo-server:port))))
+    #(lisp-echo ,(lisp-echo-server:port))))
 
 (defun info ()
-  `(#(app ,(erlang:process_info (self) 'supervisor))
+  `(#(app ,(erlang:process_info (self)))
     #(supervisor ,(erlang:process_info (supervisor)))
     #(go-echo (#(server ,(erlang:process_info (go-echo-server:pid)))
                #(port ,(erlang:port_info (go-echo-server:port)))))
     #(lisp-echo (#(server ,(erlang:process_info (lisp-echo-server:pid)))
                  #(port ,(erlang:port_info (lisp-echo-server:port)))))))
-

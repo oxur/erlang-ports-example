@@ -10,7 +10,7 @@ PWD = $(shell pwd)
 
 default: build
 
-build: $(PRIV) build-cl build-go release
+build: build-cl build-go release
 
 clean-all: clean clean-cl clean-go
 
@@ -33,11 +33,9 @@ help:
 ###   Erlang Targets   ######################################################
 #############################################################################
 
-$(PRIV):
-	@mkdir -p $(PRIV)
-
 $(PROJ_BIN):
 	@echo '>> Building release ...'
+	@rebar3 lfe compile
 	@rebar3 release
 
 release: | $(PROJ_BIN)
@@ -45,7 +43,9 @@ release: | $(PROJ_BIN)
 run: release
 	@echo '>> Running application from distribution console ...'
 	@echo $(PROJ_BIN)
-	@GO111MODULE=on GOPATH=$(PWD)/apps/ports/priv/go $(PROJ_BIN) console
+	@ERL_AFLAGS="-kernel shell_history enabled" \
+	GO111MODULE=on GOPATH=$(PWD)/apps/ports/priv/go \
+	$(PROJ_BIN) console
 
 run-fresh: clean-all build run
 
@@ -125,6 +125,11 @@ build-cl: | $(CL_DIR)
 
 clean-cl:
 	@cd $(CL_DIR) && $(MAKE) clean
+
+quicklisp-link:
+	@echo ">> Linking Common Lisp examples to local Quicklisp ..."
+	@cd apps/ports/priv/cl-port-examples/
+	@ln -s `pwd` ~/quicklisp/local-projects/
 
 #############################################################################
 ###   All Languages   #######################################################

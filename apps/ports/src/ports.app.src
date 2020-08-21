@@ -5,7 +5,8 @@
   {mod, {'ports-app', []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    lfe
    ]},
   {env,[]},
   {modules, ['go-echo-server', 'lisp-echo-server', util]},

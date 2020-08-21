@@ -16,11 +16,23 @@ This application assumes that the following are on your system:
 * [rebar3](https://www.rebar3.org/) (Erlang build tool)
 * Golang
 * SBCL (Steel Bank Common Lisp)
-* Quicklisp (CL deps manager)
+* [Quicklisp]()
 
 This project's `rebar.config.script` will set the required Go environment
 variables, but you will need to link the Common Lisp examples to your local
-Quicklisp directory (see below for details).
+Quicklisp directory:
+
+```shell
+$ cd apps/ports/priv/cl-port-examples/
+$ ln -s `pwd` ~/quicklisp/local-projects/
+$ cd -
+```
+
+Or you can run this convenience `make` target instead:
+
+```shell
+$ make quicklisp-link
+```
 
 ## Build & Run
 
@@ -31,11 +43,7 @@ $ make
 This will clone the Go and Common Lisp repos that are used in the examples.
 Now you need to tell Quicklisp about the cloned Common Lisp libs:
 
-```shell
-$ cd apps/ports/priv/cl-port-examples/
-$ ln -s `pwd` ~/quicklisp/local-projects/
-$ cd -
-```
+
 
 Now the app is ready to run:
 
@@ -43,28 +51,36 @@ Now the app is ready to run:
 $ make run
 ```
 
-See the running port `gen_server`s:
+This will put you into a release console running the Erlang shell. Switch to LFE with the following:
 
 ```erlang
-> ports_app:children().
-[{lisp_echo_server,<0.258.0>,worker,[lisp_echo_server]},
- {go_echo_server,<0.257.0>,worker,[go_echo_server]}]
+1> lfe_shell:start().
+```
+
+See the running `gen_server`s for Go and CL:
+
+```lisp
+lfe> (ports-app:children)
+```
+```lisp
+(#(lisp-echo-server #Pid<0.357.0> worker (lisp-echo-server))
+ #(go-echo-server #Pid<0.356.0> worker (go-echo-server)))
 ```
 
 ## Echo Examples
 
-```erlang
-go_echo_server:send({command, echo}).
+```lisp
+(go-echo-server:send #(command echo))
 ```
-```erlang
-{result,"echo"}
+```lisp
+#(result "echo")
 ```
 
-```erlang
-lisp_echo_server:send({command, echo}).
+```lisp
+(lisp-echo-server:send #(command echo))
 ```
-```erlang
-{result,"echo"}
+```lisp
+#(result "echo")
 ```
 
 <!-- Named page links below: /-->
