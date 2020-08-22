@@ -13,6 +13,12 @@
 
 This Rust application is intended to be used as part of the [LFE/OTP Port Examples](https://github.com/lfex/port-examples) project (which includes other language integratioins such as Common Lisp and Go).
 
+The parent project should:
+
+* have `cargo` in its `PATH`
+* ensure this Rust project gets compiled as a release
+* calls the compiled executable to start the Rust server
+
 ## License
 
 Copyright © 2020, Oxur Group
