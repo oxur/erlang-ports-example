@@ -4,6 +4,7 @@ use log;
 use twyg;
 
 fn main() {
+    log::info!("Starting Rust port server ...");
     let log_opts = twyg::LoggerOpts {
         colored: true,
         file: None,
