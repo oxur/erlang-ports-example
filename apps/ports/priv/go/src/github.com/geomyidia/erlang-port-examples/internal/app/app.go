@@ -1,4 +1,4 @@
-package port
+package app
 
 import (
 	"math/rand"
@@ -8,12 +8,16 @@ import (
 )
 
 // SetupApp ...
-func SetupApp() {
+func SetupLogging() {
 	logger.SetupLogging(&logger.ZyLogOptions{
-		Colored:      false,
-		Level:        "fatal",
+		Colored:      true,
+		Level:        "debug",
 		Output:       "stderr",
 		ReportCaller: true,
 	})
+
+}
+
+func SetupRandom() {
 	rand.Seed(time.Now().Unix())
 }
