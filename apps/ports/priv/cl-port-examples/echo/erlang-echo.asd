@@ -2,7 +2,7 @@
   :version "0.1.0"
   :author "Duncan McGreggor <oubiwann@gmail.com>"
   :license "BSD-2"
-  :depends-on ("erlang-term-optima" "log4cl")
+  :depends-on ("erlang-term" "log4cl")
   :components ((:module "src"
                 :components
                 ((:file "echo-const")
