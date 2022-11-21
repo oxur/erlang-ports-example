@@ -3,7 +3,7 @@ package echo
 import (
 	"os"
 
-	"github.com/geomyidia/erlang-port-examples/port"
+	"github.com/geomyidia/erlang-port-examples/pkg/port"
 	log "github.com/sirupsen/logrus"
 )
 
