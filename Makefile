@@ -78,14 +78,21 @@ init-go: $(GO_BASE)
 	   master \
 	   --squash
 
-update-go:
+pull-go:
 	@echo ">> Updating Go examples ..."
 	@git subtree pull \
 	   --m "Updated latest from $(PRIV)/go." \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
-	   master \
+	   main \
 	   --squash
+
+push-go:
+	@echo ">> Updating Go examples ..."
+	@git subtree push \
+	   --prefix $(GO_DIR) \
+	   $(GO_REPO) \
+	   main
 
 build-go: | $(GO_DIR)
 	@echo ">> Building Go examples ..."
