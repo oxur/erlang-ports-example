@@ -1,3 +1,4 @@
+/rebar.lock
 /apps/ports/priv/
 .rebar3
 _*
