@@ -29,6 +29,18 @@ help:
 	@echo "the general-purpose update target)."
 	@echo
 
+init: \
+	init-go \
+	init-lisp
+
+push: \
+	push-go \
+	push-lisp
+
+pull: \
+	pull-go \
+	pull-lisp
+
 #############################################################################
 ###   Erlang Targets   ######################################################
 #############################################################################
@@ -75,7 +87,7 @@ init-go: $(GO_BASE)
 	-@git subtree add \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
-	   master \
+	   main \
 	   --squash
 
 pull-go:
@@ -114,17 +126,24 @@ init-lisp:
 	-@git subtree add \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
-	   master \
+	   main \
 	   --squash
 
-update-lisp:
+pull-lisp:
 	@echo ">> Updating Common Lisp examples ..."
 	@git subtree pull \
 	   --m "Updated latest from Lisp $(CL_DIR)." \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
-	   master \
+	   main \
 	   --squash
+
+push-lisp:
+	@echo ">> Updating Common Lisp examples ..."
+	@git subtree push \
+	   --prefix $(CL_DIR) \
+	   $(CL_REPO) \
+	   main
 
 build-cl: | $(CL_DIR)
 	@echo ">> Building Common Lisp examples ..."
@@ -137,15 +156,3 @@ quicklisp-link:
 	@echo ">> Linking Common Lisp examples to local Quicklisp ..."
 	@cd apps/ports/priv/cl-port-examples/
 	@ln -s `pwd` ~/quicklisp/local-projects/
-
-#############################################################################
-###   All Languages   #######################################################
-#############################################################################
-
-init: \
-	init-go \
-	init-lisp
-
-update: \
-	update-go \
-	update-lisp
