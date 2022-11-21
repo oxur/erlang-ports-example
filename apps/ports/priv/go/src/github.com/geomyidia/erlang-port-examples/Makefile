@@ -1,6 +1,6 @@
 default: all
 
-all: bin/echo
+all: deps bin/echo
 
 bin:
 	@mkdir ./bin
@@ -13,3 +13,6 @@ run:
 
 clean:
 	@rm -f ./bin/*
+
+deps:
+	@go get -u golang.org/x/sys
