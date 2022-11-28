@@ -11,7 +11,7 @@
 (defconstant *delimiter* (char-code #\newline))
 (defconstant *max-buffer-size* 4096)
 (defconstant *log-level* :warn)
-(defconstant *debug-file* "debug.log")
+;; (defconstant *debug-file* "debug.log")
 ;; Legal values for the following:
 ;; *terminal-io* *query-io*
 (defconstant *input* *terminal-io*)
