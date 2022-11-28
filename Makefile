@@ -107,7 +107,7 @@ push-go:
 	   main
 
 build-go: | $(GO_DIR)
-	@echo ">> Building Go examples ..."
+	@echo ">> Building Go example ..."
 	@cd $(GO_DIR) && $(MAKE)
 
 clean-go:

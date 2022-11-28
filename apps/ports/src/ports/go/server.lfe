@@ -34,17 +34,15 @@
 
 (defun SERVER () (MODULE))
 (defun DELIMITER () #"\n")
-(defun GO-BIN () "go/src/github.com/geomyidia/erlang-port-examples/bin/echo")
+(defun GO-BIN () "go/src/github.com/geomyidia/erlang-port-example/bin/echo")
 (defun GO-TIMEOUT () 100)
 
 (defun initial-state ()
-  (let ((log-level (logjam:read-log-level "config/sys.config"))
-        (node-name (io_lib:format "~s" `(,(erlang:node)))))
-    `#m(opts ()
-        args ()
-        binary ,(GO-BIN)
-        pid undefined
-        os-pid undefined)))
+  `#m(opts ()
+      args ()
+      binary ,(GO-BIN)
+      pid undefined
+      os-pid undefined))
 
 (defun genserver-opts () '())
 (defun unknown-command (data)
@@ -265,7 +263,7 @@
 (defun hex-encode (data)
   (let* ((bin (erlang:term_to_binary data))
          (delim (DELIMITER))
-         (hex-msg (binary ((undermidi.util:bin->hex bin) binary) (delim binary))))
+         (hex-msg (binary ((bin->hex bin) binary) (delim binary))))
     (log-debug "Created hex msg: ~p" (list hex-msg))
     hex-msg))
 
@@ -278,3 +276,15 @@
     ('warning "warning")
     ('error "error")
     (_ "fatal")))
+
+(defun bin->hex (bin)
+  (if (>= (list_to_integer (erlang:system_info 'otp_release)) 24)
+    (let ((mod 'binary)
+          (func 'encode_hex))
+      (call mod func bin))
+    (progn
+      (log-debug "Getting hex for: ~s" `(,(lfe_io_format:fwrite1 "~p" (list bin))))
+      (list_to_binary
+       (lists:flatten
+        (list-comp ((<- x (binary_to_list bin)))
+          (io_lib:format "~2.16.0B" `(,x))))))))

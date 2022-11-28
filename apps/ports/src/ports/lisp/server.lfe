@@ -19,7 +19,7 @@
 (defun SERVER () (MODULE))
 (defun DELIMITER () '(10))
 (defun LISP-COMMAND () "sbcl")
-(defun LISP-SERVER () "cl-port-examples/echo/src/main.lisp")
+(defun LISP-SERVER () "cl-port-example/echo/src/main.lisp")
 (defun LISP-TIMEOUT () 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -40,13 +40,11 @@
     #(lisp ,(ports.lisp.server:pid))))
 
 (defun ports ()
-  `(#(go ,(ports.go.server:port))
-    #(lisp ,(ports.lisp.server:port))))
+  `(#(lisp ,(ports.lisp.server:port))))
 
 (defun info ()
   `(#(app ,(erlang:process_info (self)))
     #(supervisor ,(erlang:process_info (supervisor)))
-    #(go (#(server ,(erlang:process_info (ports.go.server:pid)))
-          #(port ,(erlang:port_info (ports.go.server:port)))))
+    #(go (#(server ,(erlang:process_info (ports.go.server:pid)))))
     #(lisp (#(server ,(erlang:process_info (ports.lisp.server:pid)))
             #(port ,(erlang:port_info (ports.lisp.server:port)))))))

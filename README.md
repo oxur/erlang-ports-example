@@ -23,21 +23,21 @@ variables, but you will need to link the Common Lisp examples to your local
 Quicklisp directory:
 
 ```shell
-$ cd apps/ports/priv/cl-port-examples/
-$ ln -s `pwd` ~/quicklisp/local-projects/
-$ cd -
+cd apps/ports/priv/cl-port-example/
+ln -s `pwd` ~/quicklisp/local-projects/
+cd -
 ```
 
 Or you can run this convenience `make` target instead:
 
 ```shell
-$ make quicklisp-link
+make quicklisp-link
 ```
 
 ## Build & Run
 
 ```shell
-$ make
+make
 ```
 
 This will build the Go and Common Lisp servers that are used in the examples, compile the LFE, and create an OTP release.
@@ -45,7 +45,7 @@ This will build the Go and Common Lisp servers that are used in the examples, co
 Now the app is ready to run:
 
 ```shell
-$ make run
+make run
 ```
 
 This will put you into a release console running the Erlang shell. Switch to LFE with the following:
@@ -59,6 +59,7 @@ See the running `gen_server`s for Go and CL:
 ```lisp
 lfe> (ports.app:children)
 ```
+
 ```lisp
 (#(ports.lisp.server #Pid<0.366.0> worker (ports.lisp.server))
  #(ports.go.server #Pid<0.365.0> worker (ports.go.server)))
@@ -69,6 +70,7 @@ lfe> (ports.app:children)
 ```lisp
 (ports.go.server:send #(command echo))
 ```
+
 ```lisp
 #(result "echo")
 ```
@@ -76,6 +78,7 @@ lfe> (ports.app:children)
 ```lisp
 (ports.lisp.server:send #(command echo))
 ```
+
 ```lisp
 #(result "echo")
 ```
@@ -103,7 +106,7 @@ Let's confirm that there are now new servers and ports created:
 ```lisp
 (ports@spacemac)lfe> (ports.app:servers)
 (#(go #Pid<0.382.0>) #(lisp #Pid<0.385.0>))
-(ports@spacemac)lfe> (ports.app:ports)  
+(ports@spacemac)lfe> (ports.app:ports)
 (#(go #Port<0.10>) #(lisp #Port<0.11>))
 ```
 
@@ -111,8 +114,6 @@ Let's confirm that there are now new servers and ports created:
 
 [logo]: priv/images/project-logo.png
 [logo-large]: priv/images/project-logo-large.png
-[github]: https://github.com/lfex/port-examples
-[gitlab]: https://gitlab.com/lfex/port-examples
 [gh-actions-badge]: https://github.com/lfex/port-examples/workflows/ci%2Fcd/badge.svg
 [gh-actions]: https://github.com/lfex/port-examples/actions
 [lfe]: https://github.com/rvirding/lfe

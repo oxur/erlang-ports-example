@@ -7,7 +7,8 @@
         kernel,
         stdlib,
         lfe,
-        logjam
+        logjam,
+        erlexec
     ]},
     {env, []},
     {modules, ['ports.go.server', 'ports.lisp.server', 'ports.util']},
