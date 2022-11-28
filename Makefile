@@ -76,7 +76,7 @@ clean:
 
 GO_REPO = https://github.com/geomyidia/erlang-port-example.git
 GO_BASE = $(PRIV)/go/src/github.com/geomyidia
-GO_PROJ = erlang-port-examples
+GO_PROJ = erlang-port-example
 GO_DIR = $(GO_BASE)/$(GO_PROJ)
 
 $(GO_BASE):
@@ -118,8 +118,8 @@ clean-go:
 #############################################################################
 
 CL_REPO = https://github.com/cl-axon/erlang-port-example.git
-CL_PROJ = erlang-port-examples
-CL_DIR = $(PRIV)/cl-port-examples
+CL_PROJ = erlang-port-example
+CL_DIR = $(PRIV)/cl-port-example
 
 init-lisp:
 	@echo ">> Setting up Common Lisp example ..."
