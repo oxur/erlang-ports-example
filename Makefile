@@ -10,11 +10,11 @@ PWD = $(shell pwd)
 
 default: build
 
-build: build-cl build-go release
+build: build-cl build-go build-rust release
 
-clean-all: clean clean-cl clean-go
+clean-all: clean clean-cl clean-go clean-rust
 
-.PHONY: default run release shutdown run-fresh build build-cl build-go clean-cl clean-go
+.PHONY: default run release shutdown run-fresh build build-cl build-go build-rust clean-cl clean-go clean-rust
 
 help:
 	@echo
@@ -31,15 +31,18 @@ help:
 
 init: \
 	init-go \
-	init-lisp
+	init-lisp \
+	init-rust
 
 push: \
 	push-go \
-	push-lisp
+	push-lisp \
+	push-rust
 
 pull: \
 	pull-go \
-	pull-lisp
+	pull-lisp \
+	pull-rust
 
 #############################################################################
 ###   Erlang Targets   ######################################################
@@ -69,6 +72,49 @@ shutdown:
 clean:
 	@rebar3 clean
 	@rm -rf $(REL_DIR)
+
+#############################################################################
+###   Rust Targets   ########################################################
+#############################################################################
+
+RUST_REPO = https://github.com/oxur/erlang-port-example.git
+RUST_BASE = $(PRIV)
+RUST_PROJ = erlang-port-example
+RUST_DIR = $(RUST_BASE)/port-example-rs
+
+$(RUST_BASE):
+	@mkdir -p $(RUST_BASE)
+
+init-rust: $(RUST_BASE)
+	@echo ">> Setting up Rust example ..."
+	-@git subtree add \
+	   --prefix $(RUST_DIR) \
+	   $(RUST_REPO) \
+	   main \
+	   --squash
+
+pull-rust:
+	@echo ">> Updating local Rust example from origin ..."
+	@git subtree pull \
+	   --m "Updated latest from LFE examples ($(PRIV))." \
+	   --prefix $(RUST_DIR) \
+	   $(RUST_REPO) \
+	   main \
+	   --squash
+
+push-rust:
+	@echo ">> Updating remote Rust example from local ..."
+	@git subtree push \
+	   --prefix $(RUST_DIR) \
+	   $(RUST_REPO) \
+	   main
+
+build-rust: | $(RUST_DIR)
+	@echo ">> Building Rust example ..."
+	@cd $(RUST_DIR) && $(MAKE)
+
+clean-rust:
+	@cd $(RUST_DIR) && $(MAKE) clean
 
 #############################################################################
 ###   Go Targets   ##########################################################
