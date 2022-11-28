@@ -16,7 +16,7 @@ This application assumes that the following are on your system:
 * [rebar3](https://www.rebar3.org/) (Erlang build tool)
 * Golang
 * SBCL (Steel Bank Common Lisp)
-* [Quicklisp]()
+* [Quicklisp](https://www.quicklisp.org/beta/)
 
 This project's `rebar.config.script` will set the required Go environment
 variables, but you will need to link the Common Lisp examples to your local

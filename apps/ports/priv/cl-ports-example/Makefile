@@ -1,7 +1,7 @@
 default: build
 
 build:
-	@cd echo && $(MAKE) build
+	@cd erlang-echo && $(MAKE) build
 
 clean:
-	@cd echo && $(MAKE) clean
+	@cd erlang-echo && $(MAKE) clean

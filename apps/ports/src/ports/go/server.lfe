@@ -34,7 +34,10 @@
 
 (defun SERVER () (MODULE))
 (defun DELIMITER () #"\n")
-(defun GO-BIN () "go/src/github.com/geomyidia/erlang-ports-example/bin/echo")
+(defun GO-BIN () (++
+  (code:priv_dir 'ports)
+  "/"
+  "go/src/github.com/geomyidia/erlang-ports-example/bin/echo"))
 (defun GO-TIMEOUT () 100)
 
 (defun initial-state ()
