@@ -1,5 +1,5 @@
-use erlang_ports_rs::commands::echo;
-use erlang_ports_rs::port::protocol;
+use erlang_ports_example::commands::echo;
+use erlang_ports_example::port::protocol;
 use log;
 use twyg;
 
