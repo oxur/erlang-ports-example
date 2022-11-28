@@ -74,7 +74,7 @@ clean:
 ###   Go Targets   ##########################################################
 #############################################################################
 
-GO_REPO = https://github.com/geomyidia/erlang-port-examples.git
+GO_REPO = https://github.com/geomyidia/erlang-port-example.git
 GO_BASE = $(PRIV)/go/src/github.com/geomyidia
 GO_PROJ = erlang-port-examples
 GO_DIR = $(GO_BASE)/$(GO_PROJ)
@@ -83,7 +83,7 @@ $(GO_BASE):
 	@mkdir -p $(GO_BASE)
 
 init-go: $(GO_BASE)
-	@echo ">> Setting up Go examples ..."
+	@echo ">> Setting up Go example ..."
 	-@git subtree add \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
@@ -91,7 +91,7 @@ init-go: $(GO_BASE)
 	   --squash
 
 pull-go:
-	@echo ">> Updating Go examples ..."
+	@echo ">> Updating Go example ..."
 	@git subtree pull \
 	   --m "Updated latest from $(PRIV)/go." \
 	   --prefix $(GO_DIR) \
@@ -100,7 +100,7 @@ pull-go:
 	   --squash
 
 push-go:
-	@echo ">> Updating Go examples ..."
+	@echo ">> Updating Go example ..."
 	@git subtree push \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
@@ -117,12 +117,12 @@ clean-go:
 ###   Common Lisp Targets   #################################################
 #############################################################################
 
-CL_REPO = https://github.com/cl-axon/erlang-port-examples.git
+CL_REPO = https://github.com/cl-axon/erlang-port-example.git
 CL_PROJ = erlang-port-examples
 CL_DIR = $(PRIV)/cl-port-examples
 
 init-lisp:
-	@echo ">> Setting up Common Lisp examples ..."
+	@echo ">> Setting up Common Lisp example ..."
 	-@git subtree add \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
@@ -130,7 +130,7 @@ init-lisp:
 	   --squash
 
 pull-lisp:
-	@echo ">> Updating Common Lisp examples ..."
+	@echo ">> Updating Common Lisp example ..."
 	@git subtree pull \
 	   --m "Updated latest from Lisp $(CL_DIR)." \
 	   --prefix $(CL_DIR) \
@@ -139,20 +139,20 @@ pull-lisp:
 	   --squash
 
 push-lisp:
-	@echo ">> Updating Common Lisp examples ..."
+	@echo ">> Updating Common Lisp example ..."
 	@git subtree push \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
 	   main
 
 build-cl: | $(CL_DIR)
-	@echo ">> Building Common Lisp examples ..."
+	@echo ">> Building Common Lisp example ..."
 	@cd $(CL_DIR) && $(MAKE)
 
 clean-cl:
 	@cd $(CL_DIR) && $(MAKE) clean
 
 quicklisp-link:
-	@echo ">> Linking Common Lisp examples to local Quicklisp ..."
-	@cd apps/ports/priv/cl-port-examples/
+	@echo ">> Linking Common Lisp example to local Quicklisp ..."
+	@cd apps/ports/priv/cl-port-example/
 	@ln -s `pwd` ~/quicklisp/local-projects/
