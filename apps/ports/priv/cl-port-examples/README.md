@@ -1,15 +1,10 @@
-# erlang-port-examples
+# erlang-port-example
 
-## Setup for Local Development
+## Usage
 
-```shell
-$ cd echo && \
-    ln -s `pwd` ~/quicklisp/local-projects/
-```
+This Common Lisp application is intended to be used as part of the [LFE/OTP Port Examples](https://github.com/lfex/port-examples) project (which includes other language integratioins such as Go and Rust).
 
-## Build and Run
+The parent project should:
 
-```shell
-$ cd echo && \
-    make && make run
-```
+* SBCL installed (not tested with any other Lisp)
+* have `quicklisp` installed
