@@ -6,6 +6,7 @@ github.com/fatih/color v1.7.0 h1:DkWD4oS2D8LGGgTQ6IvwJJXSL5Vp2ffcQg58nFV38Ys=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/geomyidia/erlcmd v0.1.2 h1:2gyqUnNvp5Wqq+HaUAQ3a/4sGk4OtT1+r4ygl2l6qJw=
 github.com/geomyidia/erlcmd v0.1.2/go.mod h1:hm+NKlnHRs/v4PeyGqNCsZcjGhkdxmYWYfWAKQdsj6s=
+github.com/geomyidia/erlcmd v0.1.3/go.mod h1:hm+NKlnHRs/v4PeyGqNCsZcjGhkdxmYWYfWAKQdsj6s=
 github.com/geomyidia/zylog v0.1.5 h1:f3FaxDrkCWJDRwiHjsDyA6YMz/EqpUcHHJ55QPEOWc8=
 github.com/geomyidia/zylog v0.1.5/go.mod h1:y1pEB+nPevEmbupvHIuT6Znt5gRxah/eJ7dsBgfgbpA=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
