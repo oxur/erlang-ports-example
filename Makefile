@@ -79,8 +79,8 @@ clean:
 
 RUST_REPO = https://github.com/oxur/erlang-port-example.git
 RUST_BASE = $(PRIV)
-RUST_PROJ = erlang-port-example
-RUST_DIR = $(RUST_BASE)/port-example-rs
+RUST_PROJ = erlang-ports-example
+RUST_DIR = $(RUST_BASE)/ports-example-rs
 
 $(RUST_BASE):
 	@mkdir -p $(RUST_BASE)
@@ -120,9 +120,9 @@ clean-rust:
 ###   Go Targets   ##########################################################
 #############################################################################
 
-GO_REPO = https://github.com/geomyidia/erlang-port-example.git
+GO_REPO = https://github.com/geomyidia/erlang-ports-example.git
 GO_BASE = $(PRIV)/go/src/github.com/geomyidia
-GO_PROJ = erlang-port-example
+GO_PROJ = erlang-ports-example
 GO_DIR = $(GO_BASE)/$(GO_PROJ)
 
 $(GO_BASE):
@@ -164,8 +164,8 @@ clean-go:
 #############################################################################
 
 CL_REPO = https://github.com/cl-axon/erlang-port-example.git
-CL_PROJ = erlang-port-example
-CL_DIR = $(PRIV)/cl-port-example
+CL_PROJ = erlang-ports-example
+CL_DIR = $(PRIV)/cl-ports-example
 
 init-lisp:
 	@echo ">> Setting up Common Lisp example ..."
