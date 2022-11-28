@@ -1,0 +1,19 @@
+[package]
+name = "erlang-ports-example"
+description = "Example Rust application that communicates with Erlang/OTP applications via Erlang Ports"
+readme = "README.md"
+version = "0.1.0"
+license = "BSD"
+authors = ["Duncan McGreggor <oubiwann@gmail.com>"]
+repository = "https://github.com/oxur/erlang_ports_example"
+documentation = "https://docs.rs/erlang_ports_example/"
+exclude = ["/.github", "/resources", ".gitignore"]
+edition = "2018"
+
+[lib]
+name = "erlang_ports_example"
+
+[dependencies]
+eetf = "0.4.0"
+log = "0.4.8"
+twyg = "0.1.10"
