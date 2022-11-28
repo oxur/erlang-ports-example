@@ -21,3 +21,5 @@ rebar3.crashdump
 *~
 \#*\#
 .\#*
+.vscode
+apps/ports/pkg
