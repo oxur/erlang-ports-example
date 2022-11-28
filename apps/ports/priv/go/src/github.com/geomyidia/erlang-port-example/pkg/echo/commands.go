@@ -1,23 +1,32 @@
 package echo
 
 import (
+	"errors"
 	"os"
 
-	"github.com/geomyidia/erlang-port-examples/pkg/port"
 	log "github.com/sirupsen/logrus"
 )
 
-// ProcessEchoCommand ...
+const (
+	echo    = "echo"
+	stop    = "stop"
+	crashIt = "crash_it"
+)
+
+var (
+	ErrUnsupCmd = errors.New("received unsupported command")
+)
+
 func ProcessEchoCommand(command string) {
 	switch command {
-	case "echo":
-		port.SendResult("echo")
-	case "stop":
+	case echo:
+		SendResult("echo")
+	case stop:
 		log.Info("Stopping Go Echo server ...")
 		os.Exit(0)
-	case "crash_it":
+	case crashIt:
 		os.Exit(1)
 	default:
-		port.SendError("Received unsupported command")
+		SendError(ErrUnsupCmd)
 	}
 }

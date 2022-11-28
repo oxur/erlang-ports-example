@@ -1,6 +1,6 @@
 package app
 
-import "github.com/geomyidia/erlang-port-examples/internal/util"
+import "github.com/geomyidia/erlang-port-example/internal/util"
 
 // Versioning data
 var (

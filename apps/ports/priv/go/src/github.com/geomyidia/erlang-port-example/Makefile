@@ -1,7 +1,7 @@
 VERSION = $(shell cat VERSION)
 DVCS_HOST = github.com
 ORG = geomyidia
-PROJ = erlang-port-examples
+PROJ = erlang-port-example
 FQ_PROJ = $(DVCS_HOST)/$(ORG)/$(PROJ)
 
 LD_VERSION = -X $(FQ_PROJ)/internal/app.version=$(VERSION)

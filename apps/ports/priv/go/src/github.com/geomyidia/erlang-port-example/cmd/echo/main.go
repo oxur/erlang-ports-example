@@ -7,9 +7,12 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/geomyidia/erlang-port-examples/internal/app"
-	"github.com/geomyidia/erlang-port-examples/pkg/echo"
-	"github.com/geomyidia/erlang-port-examples/pkg/port"
+	"github.com/geomyidia/erlcmd/pkg/messages"
+	"github.com/geomyidia/erlcmd/pkg/options"
+	"github.com/geomyidia/erlcmd/pkg/packets"
+
+	"github.com/geomyidia/erlang-port-example/internal/app"
+	"github.com/geomyidia/erlang-port-example/pkg/echo"
 )
 
 func main() {
@@ -24,7 +27,13 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		port.ProcessPortMessages(ctx, echo.ProcessEchoCommand)
+		for {
+			term, err := packets.ToTerm(options.DefaultOpts())
+			echo.SendError(err)
+			msg, err := messages.New(term)
+			echo.SendError(err)
+			echo.ProcessEchoCommand(msg.Name())
+		}
 	}()
 
 	// Listen for the interrupt signal.
@@ -33,7 +42,6 @@ func main() {
 	// Restore default behavior on the interrupt signal and notify user of shutdown.
 	cancel()
 	log.Info("Shutting down gracefully, press Ctrl+C again to force")
-
 	log.Info("Waiting for wait groups to finish ...")
 	wg.Wait()
 	log.Info("Application shutdown complete.")
