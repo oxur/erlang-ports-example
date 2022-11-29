@@ -1,4 +1,4 @@
-# erlang-port-examples
+# erlang-ports-example
 
 [![][build-badge]][build]
 [![][crate-badge]][crate]
@@ -29,11 +29,11 @@ BSD 3-clause License
 
 [logo]: resources/images/project-logo.png
 [logo-large]: resources/images/project-logo-large.png
-[build]: https://github.com/oxur/erlang-port-examples/actions?query=workflow%3Abuild+
-[build-badge]: https://github.com/oxur/erlang-port-examples/workflows/build/badge.svg
+[build]: https://github.com/oxur/erlang-ports-example/actions?query=workflow%3Abuild+
+[build-badge]: https://github.com/oxur/erlang-ports-example/workflows/build/badge.svg
 [crate]: https://crates.io/crates/twyg
-[crate-badge]: https://img.shields.io/crates/v/erlang-port-examples.svg
+[crate-badge]: https://img.shields.io/crates/v/erlang-ports-example.svg
 [docs]: https://docs.rs/twyg/
 [docs-badge]: https://img.shields.io/badge/rust-documentation-blue.svg
-[tag-badge]: https://img.shields.io/github/tag/oxur/erlang-port-examples.svg
-[tag]: https://github.com/oxur/erlang-port-examples/tags
+[tag-badge]: https://img.shields.io/github/tag/oxur/erlang-ports-example.svg
+[tag]: https://github.com/oxur/erlang-ports-example/tags

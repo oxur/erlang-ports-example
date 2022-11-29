@@ -1,12 +1,12 @@
-use erlang_ports_rs::commands::echo;
-use erlang_ports_rs::port::protocol;
+use erlang_ports_example::commands::echo;
+use erlang_ports_example::port::protocol;
 use log;
 use twyg;
 
 fn main() {
     log::info!("Starting Rust port server ...");
     let log_opts = twyg::LoggerOpts {
-        colored: true,
+        coloured: true,
         file: None,
         level: String::from("trace"),
         report_caller: true,
