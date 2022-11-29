@@ -23,8 +23,8 @@
    (status 0))
   ;; debug API
   (export
-    (pid 0)
-    (echo 1)))
+   (pid 0)
+   (echo 1)))
 
 (include-lib "logjam/include/logjam.hrl")
 
@@ -116,7 +116,12 @@
 (defun handle_info
   ;; Standard-output messages
   ((`#(stdout ,_pid ,msg) state)
-   (io:format "~s" (list (binary_to_list msg)))
+   (let ((msg (sanitize-goserver-msg msg)))
+     (io:format "~s\n" (list (binary_to_list msg)))
+     `#(noreply ,state)))
+  ;; Dist data published as message on standard-error
+  ((`#(stderr ,_pid ,(= (binary 131 (_ binary)) msg)) state)
+   (io:format "~p~n" (list (binary_to_term msg)))
    `#(noreply ,state))
   ;; Standard-error messages
   ((`#(stderr ,_pid ,msg) state)
@@ -177,7 +182,7 @@
                 (list type value stack))))))
 
 ;;;;;::=-----------------=::;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;::=-   management API   -=::;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;::=-   management API  -=::;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;::=-----------------=::;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun healthy? ()
