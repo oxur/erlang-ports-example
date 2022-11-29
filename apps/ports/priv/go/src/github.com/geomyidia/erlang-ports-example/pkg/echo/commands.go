@@ -17,7 +17,7 @@ var (
 	ErrUnsupCmd = errors.New("received unsupported command")
 )
 
-func ProcessEchoCommand(command string) {
+func Dispatch(command string) {
 	switch command {
 	case echo:
 		SendResult("echo")

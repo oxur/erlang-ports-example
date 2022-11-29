@@ -28,4 +28,5 @@ clean:
 	@rm -f ./bin/*
 
 deps:
+	@go mod tidy
 	@go get -u golang.org/x/sys
