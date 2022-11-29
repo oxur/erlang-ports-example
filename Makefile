@@ -195,8 +195,8 @@ push-lisp:
 
 fixup-lisp:
 	@echo ">> Fixing-up Common Lisp example ..."
+	@git pull origin master --rebase
 	@git merge -s subtree -Xsubtree="$(CL_DIR)" origin/main --allow-unrelated-histories
-	@git pull origin master --rebase -s subtree -Xsubtree="$(CL_DIR)" origin/main --allow-unrelated-histories
 
 build-cl: | $(CL_DIR)
 	@echo ">> Building Common Lisp example ..."
