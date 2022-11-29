@@ -107,7 +107,7 @@ push-rust:
 	@git subtree push \
 	   --prefix $(RUST_DIR) \
 	   $(RUST_REPO) \
-	   --rejoin main
+	   main
 
 build-rust: | $(RUST_DIR)
 	@echo ">> Building Rust example ..."
@@ -150,7 +150,7 @@ push-go:
 	@git subtree push \
 	   --prefix $(GO_DIR) \
 	   $(GO_REPO) \
-	   --rejoin main
+	   main
 
 build-go: | $(GO_DIR)
 	@echo ">> Building Go example ..."
@@ -191,7 +191,7 @@ push-lisp:
 	@git subtree push \
 	   --prefix $(CL_DIR) \
 	   $(CL_REPO) \
-	   --rejoin main
+	   main
 
 build-cl: | $(CL_DIR)
 	@echo ">> Building Common Lisp example ..."
