@@ -27,13 +27,7 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for {
-			term, err := packets.ToTerm(options.DefaultOpts())
-			echo.SendError(err)
-			msg, err := messages.New(term)
-			echo.SendError(err)
-			echo.ProcessEchoCommand(msg.Name())
-		}
+		HandleMessages(ctx)
 	}()
 
 	// Listen for the interrupt signal.
@@ -45,4 +39,40 @@ func main() {
 	log.Info("Waiting for wait groups to finish ...")
 	wg.Wait()
 	log.Info("Application shutdown complete.")
+}
+
+func HandleMessages(ctx context.Context) {
+	log.Info("processing messages sent to Go language server ...")
+	go func() {
+		for {
+			HandleMessage()
+			continue
+		}
+	}()
+	<-ctx.Done()
+}
+
+func HandleMessage() {
+	// term, err := packets.ToTerm(&options.Opts{IsHexEncoded: true})
+	term, err := packets.ToTerm(options.DefaultOpts())
+	if err != nil {
+		echo.SendError(err)
+		return
+	}
+	log.Tracef("got Erlang ports term: %#v", term)
+	msg, err := messages.New(term, options.DefaultOpts())
+	if err != nil {
+		echo.SendError(err)
+		return
+	}
+
+	msgName := msg.Name()
+	log.Tracef("Got message name %s", msgName)
+	switch msg.Type() {
+	case string(messages.CommandKey):
+		echo.Dispatch(msgName)
+	default:
+		echo.SendError(echo.ErrUnsupCmd)
+	}
+	log.Trace("message handling complete")
 }
