@@ -193,6 +193,10 @@ push-lisp:
 	   $(CL_REPO) \
 	   main
 
+fixup-lisp:
+	@echo ">> Fixing-up Common Lisp example ..."
+	@git merge -s subtree -Xsubtree="$(CL_DIR)" origin/main --allow-unrelated-histories
+
 build-cl: | $(CL_DIR)
 	@echo ">> Building Common Lisp example ..."
 	@cd $(CL_DIR) && $(MAKE)
