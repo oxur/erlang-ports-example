@@ -77,7 +77,7 @@ clean:
 ###   Rust Targets   ########################################################
 #############################################################################
 
-RUST_REPO = https://github.com/oxur/erlang-port-example.git
+RUST_REPO = https://github.com/oxur/erlang-ports-example.git
 RUST_BASE = $(PRIV)
 RUST_PROJ = erlang-ports-example
 RUST_DIR = $(RUST_BASE)/ports-example-rs
@@ -165,7 +165,7 @@ clean-build-go: clean-go build-go
 ###   Common Lisp Targets   #################################################
 #############################################################################
 
-CL_REPO = https://github.com/cl-axon/erlang-port-example.git
+CL_REPO = https://github.com/cl-axon/erlang-ports-example.git
 CL_PROJ = erlang-ports-example
 CL_DIR = $(PRIV)/cl-ports-example
 
@@ -202,5 +202,5 @@ clean-cl:
 
 quicklisp-link:
 	@echo ">> Linking Common Lisp example to local Quicklisp ..."
-	@cd apps/ports/priv/cl-port-example/
+	@cd apps/ports/priv/cl-ports-example/
 	@ln -s `pwd` ~/quicklisp/local-projects/

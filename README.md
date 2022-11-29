@@ -23,7 +23,7 @@ variables, but you will need to link the Common Lisp examples to your local
 Quicklisp directory:
 
 ```shell
-cd apps/ports/priv/cl-port-example/
+cd apps/ports/priv/cl-ports-example/
 ln -s `pwd` ~/quicklisp/local-projects/
 cd -
 ```

@@ -11,8 +11,8 @@ import (
 	"github.com/geomyidia/erlcmd/pkg/options"
 	"github.com/geomyidia/erlcmd/pkg/packets"
 
-	"github.com/geomyidia/erlang-port-example/internal/app"
-	"github.com/geomyidia/erlang-port-example/pkg/echo"
+	"github.com/geomyidia/erlang-ports-example/internal/app"
+	"github.com/geomyidia/erlang-ports-example/pkg/echo"
 )
 
 func main() {

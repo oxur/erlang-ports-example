@@ -1,4 +1,4 @@
-module github.com/geomyidia/erlang-port-example
+module github.com/geomyidia/erlang-ports-example
 
 go 1.18
 
