@@ -1,4 +1,4 @@
-use erlang_ports_rs::messages;
+use erlang_ports_example::messages;
 
 #[test]
 fn test_error_message() {

@@ -1,5 +1,5 @@
 use eetf::Binary;
-use erlang_ports_rs::util;
+use erlang_ports_example::util;
 
 #[test]
 fn test_str_to_term() {
