@@ -1,1 +1,1 @@
-pub fn process_port_messages(msg: fn(&str)) {}
+pub fn process_port_messages(_msg: fn(&str)) {}

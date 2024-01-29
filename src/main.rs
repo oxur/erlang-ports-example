@@ -5,14 +5,15 @@ use twyg;
 
 fn main() {
     log::info!("Starting Rust port server ...");
-    let log_opts = twyg::LoggerOpts {
+    let log_opts = twyg::Opts {
         coloured: true,
         file: None,
-        level: String::from("trace"),
+        level: Some(String::from("trace")),
         report_caller: true,
+        time_format: None,
     };
 
-    match twyg::setup_logger(&log_opts) {
+    match twyg::setup(log_opts) {
         Ok(_) => {}
         Err(error) => panic!("Could not setup logger: {:?}", error),
     };

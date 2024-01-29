@@ -11,7 +11,7 @@
 
 ## Usage
 
-This Rust application is intended to be used as part of the [LFE/OTP Port Examples](https://github.com/lfex/port-examples) project (which includes other language integratioins such as Common Lisp and Go).
+This Rust application is intended to be used as part of the [LFE/OTP Port Examples](https://github.com/lfex/port-examples) project (which includes other language integrations such as Common Lisp and Go).
 
 The parent project should:
 
@@ -21,7 +21,7 @@ The parent project should:
 
 ## License
 
-Copyright © 2020, Oxur Group
+Copyright © 2020-2024, Oxur Group
 
 BSD 3-clause License
 

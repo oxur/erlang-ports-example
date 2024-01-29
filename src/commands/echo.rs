@@ -1,5 +1,5 @@
 use crate::port::messages;
-use eetf::{Atom, Term};
+// use eetf::{Atom, Term};
 use log;
 
 pub fn process_echo_command(command: &str) {
